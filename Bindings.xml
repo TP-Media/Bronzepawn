@@ -1,0 +1,11 @@
+﻿<Bindings>
+	<Binding name="BRONZEPAWN_TOGGLE_UI" header="BRONZEPAWN">
+		BronzePawnUIShow()
+	</Binding>
+	<Binding name="BRONZEPAWN_COMPARE_LEFT">
+		BronzePawnUI_SetCompareFromHover(1)
+	</Binding>
+	<Binding name="BRONZEPAWN_COMPARE_RIGHT">
+		BronzePawnUI_SetCompareFromHover(2)
+	</Binding>
+</Bindings>

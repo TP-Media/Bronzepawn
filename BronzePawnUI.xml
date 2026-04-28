@@ -1,0 +1,1473 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../FrameXML.old/UI.xsd">
+
+	<!--
+		BronzePawn created by MeuchelManni
+		See Readme.htm for more information.
+		
+	-->
+	
+	<!-- Standard BronzePawn fonts -->
+	<Font name="BronzePawnFontBlue" inherits="GameFontNormal" virtual="true">
+		<Color r ="0.82" g="0.62" b="0.28" />
+	</Font>
+	<Font name="BronzePawnFontBlueSmall" inherits="GameFontNormalSmall" virtual="true">
+		<Color r ="0.82" g="0.62" b="0.28" />
+	</Font>
+	<Font name="BronzePawnFontSilver" inherits="GameFontNormal" virtual="true">
+		<Color r ="0.90" g="0.80" b="0.56" />
+	</Font>
+	<Font name="BronzePawnFontSilverLarge" inherits="GameFontNormalLarge" virtual="true">
+		<Color r ="0.90" g="0.80" b="0.56" />
+	</Font>
+
+	<!-- Standard BronzePawn dialog and frame template -->	
+	<Frame name="BronzePawnUIDialogTemplate" virtual="true" parent="UIParent" frameStrata="FULLSCREEN_DIALOG" hidden="true" enableMouse="true">
+	 	<Anchors><Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER" /></Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<Color a="1" r="0.08" g="0.05" b="0.02" />
+			<BackgroundInsets><AbsInset left="10" right="11" top="11" bottom="10" /></BackgroundInsets>
+			<TileSize><AbsValue val="32" /></TileSize>
+			<EdgeSize><AbsValue val="32" /></EdgeSize>
+		</Backdrop>
+	</Frame>
+
+	<!-- Standard BronzePawn large frame tab template -->
+	<Frame name="BronzePawnUITabPageTemplate" virtual="true" hidden="true">
+		<Anchors><Anchor point="TOPLEFT" /><Anchor point="BOTTOMRIGHT" /></Anchors>
+	</Frame>
+	
+	<!-- Standard BronzePawn button with a tooltip template -->
+	<Button name="BronzePawnUIButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+			<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+		</Scripts>
+	</Button>
+
+	<!-- Standard BronzePawn options checkbox template -->
+	<CheckButton name="BronzePawnUICheckboxTemplate" inherits="UICheckButtonTemplate" virtual="true">
+		<Size><AbsDimension x="25" y="25" /></Size>
+		<HitRectInsets><AbsInset left="0" right="-225" top="0" bottom="0"/></HitRectInsets>
+		<Scripts>
+			<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+			<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<CheckButton name="BronzePawnUISmallCheckboxTemplate" inherits="UICheckButtonTemplate" virtual="true">
+		<Size><AbsDimension x="20" y="20" /></Size>
+		<HitRectInsets><AbsInset left="0" right="-160" top="0" bottom="0"/></HitRectInsets>
+		<Scripts>
+			<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+			<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<!-- Label for standard BronzePawn options checkbox -->
+	<FontString name="BronzePawnUICheckboxLabelTemplate" inherits="GameFontNormal" virtual="true" justifyH="LEFT" justifyV="MIDDLE">
+		<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="0" /></Offset></Anchor></Anchors>
+		<Size><AbsDimension x="250" y="25" /></Size>
+	</FontString>
+	<FontString name="BronzePawnUISmallCheckboxLabelTemplate" inherits="GameFontNormalSmall" virtual="true" justifyH="LEFT" justifyV="MIDDLE">
+		<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="20" y="0" /></Offset></Anchor></Anchors>
+		<Size><AbsDimension x="160" y="20" /></Size>
+	</FontString>
+
+	<!-- Standard BronzePawn options radio button template -->
+	<CheckButton name="BronzePawnUIRadioButtonTemplate" inherits="UIRadioButtonTemplate" virtual="true">
+		<Size><AbsDimension x="15" y="15" /></Size>
+		<HitRectInsets><AbsInset left="0" right="-200" top="0" bottom="0"/></HitRectInsets>
+		<Scripts>
+			<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+			<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<!-- Label for standard BronzePawn options radio button-->
+	<FontString name="BronzePawnUIRadioButtonLabelTemplate" inherits="GameFontNormalSmall" virtual="true" justifyH="LEFT" justifyV="MIDDLE">
+		<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="0" /></Offset></Anchor></Anchors>
+		<Size><AbsDimension x="225" y="15" /></Size>
+	</FontString>
+
+	<!-- BronzePawn list item templates -->
+	<Button name="BronzePawnUIFrame_Generic_ItemTemplate" virtual="true">
+		<ButtonText name="$parentText" justifyH="LEFT" setAllPoints="true" />
+		<NormalFont style="GameFontHighlight" />
+		<HighlightFont style="GameFontHighlight" />
+		<DisabledFont style="BronzePawnFontBlue" />
+		<PushedTextOffset x="1" y="-1" />
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD">
+			<Color r=".196" g=".388" b=".8" />
+		</HighlightTexture>
+	</Button>
+	
+	<Button name="BronzePawnUIFrame_ScaleSelector_ItemTemplate" virtual="true" inherits="BronzePawnUIFrame_Generic_ItemTemplate">
+		<Size><AbsDimension x="140" y="16" /></Size>
+		<DisabledFont style="BronzePawnFontBlueSmall" />
+		<Scripts>
+			<OnClick>BronzePawnUIFrame_ScaleSelector_OnClick(this)</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Button name="BronzePawnUIFrame_StatsList_ItemTemplate" virtual="true" inherits="BronzePawnUIFrame_Generic_ItemTemplate">
+		<Size><AbsDimension x="180" y="16" /></Size>
+		<Scripts>
+			<OnClick>BronzePawnUIFrame_StatsList_OnClick(this:GetID())</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!-- BronzePawn inventory window button template -->
+	<Button name="BronzePawnUI_InventoryButtonTemplate" virtual="true" hidden="false" inherits="UIPanelButtonTemplate">
+		<Size><AbsDimension x="48" y="24" /></Size>
+		<NormalTexture file="Interface\AddOns\BronzePawn\Textures\BronzePawnButton">
+			<TexCoords left="0" top="0" right=".5" bottom="0.5" />
+		</NormalTexture>
+		<PushedTexture file="Interface\AddOns\BronzePawn\Textures\BronzePawnButton">
+			<TexCoords left="0" top="0.5" right=".5" bottom="1" />
+		</PushedTexture>
+		<DisabledTexture file="Interface\AddOns\BronzePawn\Textures\BronzePawnButton">
+			<TexCoords left="0.5" top="0.5" right="1" bottom="1" />
+		</DisabledTexture>
+		<HighlightTexture file="Interface\AddOns\BronzePawn\Textures\BronzePawnButton" alphaMode="ADD">
+			<TexCoords left=".5" top="0" right="1" bottom="0.5" />
+		</HighlightTexture>
+	</Button>
+	
+	<!-- A stat line on the Compare tab -->
+	<Frame name="BronzePawnUICompareStatLineTemplate" virtual="true">
+		<Size><AbsDimension x="460" y="20" /></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="CENTER" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="155" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="150" y="20" /></Size>
+				</FontString>
+				<FontString name="$parentDifference1" inherits="GameFontRed" justifyH="CENTER" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="60" y="20" /></Size>
+				</FontString>
+				<FontString name="$parentQuantity1" inherits="GameFontNormal" justifyH="CENTER" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="80" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="60" y="20" /></Size>
+				</FontString>
+				<FontString name="$parentQuantity2" inherits="GameFontNormal" justifyH="CENTER" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="320" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="60" y="20" /></Size>
+				</FontString>
+				<FontString name="$parentDifference2" inherits="GameFontGreen" justifyH="CENTER" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="400" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="60" y="20" /></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	
+	<Frame name="BronzePawnUICompareStatLineHeaderTemplate" virtual="true">
+		<Size><AbsDimension x="460" y="20" /></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="BronzePawnFontBlueSmall" justifyH="CENTER" justifyV="BOTTOM">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="155" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="150" y="20" /></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	
+	<!-- A gem line in the gems list -->
+	<Button name="BronzePawnUIGemLineTemplate" virtual="true">
+		<Size><AbsDimension x="515" y="17" /></Size>
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD">
+			<Color r=".196" g=".388" b=".8" />
+		</HighlightTexture>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="1" y="1" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="15" y="15" /></Size>
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="18" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="425" y="16" /></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>BronzePawnUIFrame_GemList_OnEnter(self)</OnEnter>
+			<OnLeave>BronzePawnUIFrame_GemList_OnLeave(self)</OnLeave>
+			<OnClick>BronzePawnUIFrame_GemList_OnClick(self)</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="BronzePawnUIGemHeaderLineTemplate" virtual="true">
+		<Size><AbsDimension x="515" y="17" /></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="BronzePawnFontBlueSmall" justifyH="LEFT" justifyV="BOTTOM">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="425" y="16" /></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	
+	<!-- BronzePawn's item scanning tooltip -->
+	<GameTooltip name="BronzePawnPrivateTooltip" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>this:SetOwner(UIParent, "ANCHOR_NONE")</OnLoad>
+		</Scripts>
+	</GameTooltip>
+	
+	<!-- The BronzePawn button on the inventory window -->
+	<Button name="BronzePawnUI_InventoryBronzePawnButton" parent="PaperDollFrame" inherits="BronzePawnUI_InventoryButtonTemplate">
+		<Anchors><Anchor point="BOTTOMRIGHT" relativeTo="PaperDollFrame" /></Anchors><!-- Offsets defined in BronzePawnUI_InventoryBronzePawnButton_Move -->
+		<Scripts>
+			<OnEnter>BronzePawnUI_InventoryBronzePawnButton_OnEnter(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+			<OnClick>BronzePawnUIShow()</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!-- The BronzePawn button on the inspect window -->
+	<Button name="BronzePawnUI_InspectBronzePawnButtonTemplate" virtual="true" inherits="BronzePawnUI_InventoryButtonTemplate">
+		<Anchors><Anchor point="BOTTOMRIGHT" relativeTo="InspectPaperDollFrame" /></Anchors>
+		<Scripts>
+			<OnEnter>BronzePawnUI_InspectBronzePawnButton_OnEnter(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+			<OnClick>BronzePawnUIShow()</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!-- The BronzePawn button on the socketing window -->
+	<Button name="BronzePawnUI_SocketingBronzePawnButtonTemplate" virtual="true" inherits="BronzePawnUI_InventoryButtonTemplate">
+		<Anchors><Anchor point="TOPRIGHT" relativeTo="ItemSocketingFrame" /></Anchors>
+		<Scripts>
+			<OnEnter>BronzePawnUI_SocketingBronzePawnButton_OnEnter(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+			<OnClick>BronzePawnUIShowTab(BronzePawnUIGemsTabPage, true)</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!-- BronzePawn tooltips with a chunkier border -->
+	<GameTooltip name="BronzePawnUI_FattyTooltip" virtual="true" inherits="GameTooltipTemplate">
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<Color a="1" r="0" g="0" b="0" />
+			<BackgroundInsets><AbsInset left="2" right="2" top="2" bottom="2" /></BackgroundInsets>
+			<TileSize><AbsValue val="16" /></TileSize>
+			<EdgeSize><AbsValue val="16" /></EdgeSize>
+		</Backdrop>
+	</GameTooltip>
+	
+	<!-- The main BronzePawn configuration UI -->
+	<Frame name="BronzePawnUIFrame" inherits="BronzePawnUIDialogTemplate" toplevel="true" parent="UIParent" frameStrata="MEDIUM" hidden="true" movable="true">
+		<Size><AbsDimension x="600" y="450" /></Size>
+
+		<Frames>
+
+			<Button name="BronzePawnUIFrame_TinyCloseButton" hidden="false" inherits="UIPanelCloseButton">
+				<Anchors><Anchor point="TOPRIGHT"><Offset><AbsDimension x="-15" y="34" /></Offset></Anchor></Anchors>
+			</Button>
+			
+			<Button inherits="UIPanelButtonTemplate" text="BronzePawnUIFrame_CloseButton_Text">
+				<Anchors><Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-20" y="20" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="95" y="25" /></Size>
+				<Scripts>
+					<OnClick>BronzePawnUIShow()</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- The header tab -->
+			<Frame parent="BronzePawnUIFrame" enableMouse="true">
+				<Size><AbsDimension x="600" y="75" /></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="70" />
+				</Anchors>
+				<Backdrop bgFile="Interface\AddOns\BronzePawn\Textures\BronzePawnUIHeader" tile="false" />
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="BronzePawnUIFrame_HeaderLogo" file="Interface\AddOns\BronzePawn\Textures\BronzePawnLogo">
+							<Size><AbsDimension x="64" y="32" /></Size>
+							<Anchors><Anchor point="TOPLEFT" x="17" y="-36" /></Anchors>
+						</Texture>
+						<FontString name="BronzePawnUIHeader" inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="MIDDLE" wordwrap="false">
+							<Size><AbsDimension x="440" y="32" /></Size>
+							<Anchors><Anchor point="TOPLEFT" x="110" y="-37" /></Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnMouseDown>BronzePawnUIFrame:StartMoving()</OnMouseDown>
+					<OnMouseUp>BronzePawnUIFrame:StopMovingOrSizing()</OnMouseUp>
+					<OnDragStop>BronzePawnUIFrame:StopMovingOrSizing()</OnDragStop>
+				</Scripts>
+			</Frame>
+			
+			<!-- The scale selector -->
+			<Frame name="BronzePawnUIScaleSelector" parent="BronzePawnUIFrame" enableMouse="true" inherits="BronzePawnUIDialogTemplate" frameStrata="MEDIUM" hidden="true">
+				<Size><AbsDimension x="200" y="430" /></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" x="12" y="-10" />
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+					<Color a="1" r="0" g="0" b="0" />
+					<BackgroundInsets><AbsInset left="10" right="11" top="11" bottom="10" /></BackgroundInsets>
+					<TileSize><AbsValue val="32" /></TileSize>
+					<EdgeSize><AbsValue val="32" /></EdgeSize>
+				</Backdrop>
+
+				<Layers>
+					
+					<!-- Scale selector: art layer -->
+					<Layer level="ARTWORK">
+						
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" wordwrap="false" text="BronzePawnUIFrame_ScaleSelector_Header_Text">
+							<Anchors><Anchor point="TOPLEFT" x="15" y="-15" /></Anchors>
+							<Size><AbsDimension x="170" y="15" /></Size>
+						</FontString>
+						<Texture file="Interface\AddOns\BronzePawn\Textures\HorizontalBar">
+							<Anchors><Anchor point="TOPLEFT" x="10" y="-32" /></Anchors>
+							<Size><AbsDimension x="180" y="1" /></Size>
+						</Texture>
+						<Texture file="Interface\AddOns\BronzePawn\Textures\HorizontalBar">
+							<Anchors><Anchor point="TOPLEFT" x="10" y="-396" /></Anchors>
+							<Size><AbsDimension x="180" y="1" /></Size>
+						</Texture>
+
+					</Layer>
+					
+				</Layers>
+
+				<Frames>
+
+					<CheckButton name="BronzePawnUIFrame_ShowScaleCheck" inherits="BronzePawnUISmallCheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="-398" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUISmallCheckboxLabelTemplate" text="BronzePawnUIFrame_ShowScaleCheck_Label_Text">
+								<Size><AbsDimension x="160" y="15" /></Size>
+							</FontString>
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ShowScaleCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<ScrollFrame name="BronzePawnUIScaleSelectorScrollFrame" inherits="UIPanelScrollFrameTemplate">
+						<Anchors><Anchor point="TOPLEFT" x="15" y="-35" /></Anchors>
+						<Size><AbsDimension x="153" y="358" /></Size>
+						<ScrollChild>
+							<Frame name="BronzePawnUIScaleSelectorScrollContent">
+								<Anchors><Anchor point="TOPLEFT" /></Anchors>
+								<Size><AbsDimension x="155" y="10" /></Size>
+								<!-- Content added dynamically, and size updated dynamically -->
+
+								<Frames>
+
+									<Frame name="BronzePawnUIFrame_ScaleSelector_HighlightFrame" hidden="true">
+										<Anchors><Anchor point="TOPLEFT"></Anchor></Anchors>
+										<Size><AbsDimension x="155" y="16" /></Size>
+										<Layers>
+											<Layer level="ARTWORK">
+												<Texture file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD" />
+												<Texture file="Interface\ChatFrame\ChatFrameExpandArrow">
+													<Anchors><Anchor point="RIGHT" x="0" y="0" /></Anchors>
+													<Size><AbsDimension x="14" y="14" /></Size>
+												</Texture>
+											</Layer>
+										</Layers>
+									</Frame>
+
+								</Frames>
+
+							</Frame>
+						</ScrollChild>
+					</ScrollFrame>
+					
+				</Frames>
+				
+			</Frame>
+			
+			<!-- The Scale tab -->
+			<Frame name="BronzePawnUIScalesTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+
+				<!-- Scale tab: art layer -->
+				<Layers>
+					<Layer level="ARTWORK">
+						
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_ScalesWelcomeLabel_Text"><!-- Scales are sets of stats and values that are used to assign point values to items. -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="40" /></Size>
+						</FontString>
+						
+						<!-- Scale settings area -->
+						<FontString name="BronzePawnUIFrame_ScaleNameLabel" inherits="GameFontHighlightLarge" justifyH="LEFT" wordwrap="false"><!-- Name of scale -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-75"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="500" y="20" /></Size>
+						</FontString>
+						
+						<FontString name="BronzePawnUIFrame_ScaleColorSwatch_Label" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_ScaleColorSwatch_Label_Text"><!-- Change color -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="320" y="-100"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="100" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_ScaleTypeLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE"><!-- You can change this scale from the Values tab. -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="65" y="-130"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="500" y="20" /></Size>
+						</FontString>
+						
+						<!-- Share area -->
+						<FontString inherits="GameFontHighlightLarge" justifyH="LEFT" wordwrap="false" text="BronzePawnUIFrame_ScaleSettingsShareHeader_Text"><!-- Share your scales -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-160"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="500" y="20" /></Size>
+						</FontString>
+
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_ImportScaleButton_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-190"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="400" y="25" /></Size>
+						</FontString>
+
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_ExportScaleButton_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-220"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="400" y="25" /></Size>
+						</FontString>
+
+						<!-- New scale area -->
+						<FontString inherits="GameFontHighlightLarge" justifyH="LEFT" wordwrap="false" text="BronzePawnUIFrame_ScaleSettingsNewHeader_Text"><!-- Create a new scale -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-255"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="500" y="20" /></Size>
+						</FontString>
+
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_CopyScaleButton_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-285"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="400" y="25" /></Size>
+						</FontString>
+
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_NewScaleButton_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-315"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="400" y="25" /></Size>
+						</FontString>
+
+						<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_NewScaleFromDefaultsButton_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-345"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="400" y="25" /></Size>
+						</FontString>
+
+					</Layer>
+				</Layers>
+
+				<!-- Scale tab: UI elements -->
+				<Frames>
+					
+					<!-- Scale settings area -->
+					<Button name="BronzePawnUIFrame_RenameScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_RenameScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-100" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_RenameScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_DeleteScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_DeleteScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-100" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_DeleteScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_ScaleColorSwatch">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="280" y="-93" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="40" y="40" /></Size>
+						<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up" />
+						<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down" />
+						<HighlightTexture file="Interface\Buttons\ButtonHilight-Round" alphaMode="ADD" />
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture name="BronzePawnUIFrame_ScaleColorSwatch_Color">
+									<Size><AbsDimension x="14" y="14" /></Size>
+									<Anchors><Anchor point="CENTER"><Offset><AbsDimension x="0" y="0" /></Offset></Anchor></Anchors>
+									<Color r ="1.0" g="1.0" b="1.0" a="1.0" />
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+							<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+							<OnClick>BronzePawnUIFrame_ScaleColorSwatch_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+					
+					<!-- Share area -->
+					<Button name="BronzePawnUIFrame_ImportScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_ImportScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-190" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_ImportScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_ExportScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_ExportScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-220" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_ExportScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<!-- New scale area -->
+					<Button name="BronzePawnUIFrame_CopyScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_CopyScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-285" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_CopyScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_NewScaleButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_NewScaleButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-315" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_NewScaleButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_NewScaleFromDefaultsButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_NewScaleFromDefaultsButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-345" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_NewScaleFromDefaultsButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+
+				</Frames>
+
+				<Scripts>
+					<OnShow>
+						BronzePawnUI_ScalesTab_Refresh()
+					</OnShow>
+				</Scripts>
+				
+			</Frame>
+				
+			<!-- The Values tab -->
+			<Frame name="BronzePawnUIValuesTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				
+				<!-- Values tab: art layer -->
+				<Layers>
+					<Layer level="ARTWORK">
+
+						<!-- Header area -->
+						<FontString name="BronzePawnUIFrame_ValuesWelcomeLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="55" /></Size>
+						</FontString>
+
+						<!-- Stat editing area -->
+						<FontString name="BronzePawnUIFrame_DescriptionLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_DescriptionLabel_Text"><!-- The primary stat, Stamina. -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="255" y="-105"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="300" y="120" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUIFrame_StatNameLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_StatNameLabel_Text"><!-- 1 Stamina is worth: -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="255" y="-230"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="300" y="20" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUIFrame_StatValueLabel" inherits="ChatFontNormal" justifyH="LEFT" justifyV="MIDDLE"><!-- 1.234 -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="275" y="-255"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="140" y="25" /></Size>
+						</FontString>
+						
+					</Layer>
+				</Layers>
+
+				<!-- Values tab: UI elements -->
+				<Frames>
+
+					<!-- Stats list -->
+					<Frame>
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="-80" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="213" y="304" /></Size>
+						<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<Color a="0.5" r="0" g="0" b="0" />
+							<EdgeSize><AbsValue val="16" /></EdgeSize>
+							<TileSize><AbsValue val="16" /></TileSize>
+							<BackgroundInsets><AbsInset left="4" right="4" top="4" bottom="4" /></BackgroundInsets>
+						</Backdrop>
+					</Frame>
+					<ScrollFrame name="BronzePawnUIFrame_StatsList" inherits="FauxScrollFrameTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-86" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="180" y="292" /></Size>
+						<Scripts>
+							<OnVerticalScroll>FauxScrollFrame_OnVerticalScroll(BronzePawnUIFrame_StatsList, offset, 16, BronzePawnUIFrame_StatsList_Update)</OnVerticalScroll>
+							<OnShow>BronzePawnUIFrame_StatsList_Update()</OnShow>
+						</Scripts>
+					</ScrollFrame>
+					<Button name="BronzePawnUIFrame_StatsList_Item0" >
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList" relativePoint="TOPLEFT"><Offset><AbsDimension x="2" y="0" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="1" y="1" /></Size>
+					</Button>
+					<Frame name="BronzePawnUIFrame_StatsList_HighlightFrame" hidden="true">
+						<Anchors><Anchor point="TOPLEFT"></Anchor></Anchors>
+						<Size><AbsDimension x="180" y="16" /></Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<Texture name="BronzePawnUIFrame_StatsList_Highlight" file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD" />
+							</Layer>
+						</Layers>
+					</Frame>
+
+					<Button name="BronzePawnUIFrame_StatsList_Item1" id="1" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item0" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item2" id="2" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item1" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item3" id="3" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item2" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item4" id="4" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item3" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item5" id="5" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item4" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item6" id="6" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item5" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item7" id="7" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item6" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item8" id="8" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item7" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item9" id="9" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item8" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item10" id="10" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item9" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item11" id="11" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item10" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item12" id="12" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item11" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item13" id="13" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item12" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item14" id="14" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item13" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item15" id="15" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item14" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item16" id="16" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item15" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item17" id="17" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item16" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+					<Button name="BronzePawnUIFrame_StatsList_Item18" id="18" inherits="BronzePawnUIFrame_StatsList_ItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="BronzePawnUIFrame_StatsList_Item17" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Button>
+
+					<!-- Description and editing area -->
+					<EditBox name="BronzePawnUIFrame_StatValueBox" inherits="InputBoxTemplate" hidden="false">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="275" y="-255"/></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="140" y="25" /></Size>
+						<Scripts>
+							<OnTextChanged>BronzePawnUIFrame_StatValueBox_OnTextChanged()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					
+					<Button name="BronzePawnUIFrame_ClearValueButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_ClearValueButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="425" y="-255" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="90" y="25" /></Size>
+						<Scripts>
+							<OnClick>BronzePawnUIFrame_ClearValueButton_OnClick()</OnClick>
+						</Scripts>
+					</Button>
+					
+					<Frame name="BronzePawnUIFrame_ScaleSocketOptionsList" hidden="true">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="275" y="-290" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="225" y="45" /></Size>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="BronzePawnUIFrame_ScaleSocketOptionsHeaderLabel" inherits="BronzePawnUIRadioButtonLabelTemplate" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_ScaleSocketOptionsHeaderLabel_Text">
+								<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0" /></Offset></Anchor></Anchors>
+								<Size><AbsDimension x="250" y="15" /></Size>
+							</FontString>
+						</Layer></Layers>
+						<Frames>
+							<CheckButton name="BronzePawnUIFrame_ScaleSocketBestRadio" inherits="BronzePawnUIRadioButtonTemplate">
+								<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="-15" /></Offset></Anchor></Anchors>
+								<Layers><Layer level="ARTWORK">
+									<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_ScaleSocketBestRadio_Text" />
+								</Layer></Layers>
+								<Scripts><OnClick>BronzePawnUIFrame_ScaleSocketOptionsList_SetSelection(true)</OnClick></Scripts>
+							</CheckButton>
+							<CheckButton name="BronzePawnUIFrame_ScaleSocketCorrectRadio" inherits="BronzePawnUIRadioButtonTemplate">
+								<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="-30" /></Offset></Anchor></Anchors>
+								<Layers><Layer level="ARTWORK">
+									<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_ScaleSocketCorrectRadio_Text" />
+								</Layer></Layers>
+								<Scripts><OnClick>BronzePawnUIFrame_ScaleSocketOptionsList_SetSelection(false)</OnClick></Scripts>
+							</CheckButton>
+						</Frames>
+					</Frame>
+
+					<CheckButton name="BronzePawnUIFrame_NormalizeValuesCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="30" y="-400" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_NormalizeValuesCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_NormalizeValuesCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+				</Frames>
+				
+				<Scripts>
+					<OnShow>
+						BronzePawnUI_ValuesTab_Refresh()
+						BronzePawnUIFrame_StatsList_SelectStat(0)
+					</OnShow>
+				</Scripts>
+						
+			</Frame>
+			
+			<!-- The Compare tab -->
+			<Frame name="BronzePawnUICompareTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				<Layers>
+
+					<Layer level="OVERLAY">
+						
+						<!-- The item header area -->
+						
+						<Texture file="Interface\AddOns\BronzePawn\Textures\HorizontalBar">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-69" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="580" y="1" /></Size>
+						</Texture>
+
+						<!-- The total score row -->
+
+						<FontString name="BronzePawnUICompareItemScoreDifference1" inherits="GameFontRed" justifyH="CENTER" justifyV="MIDDLE">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="70" y="-353" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="60" y="37" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUICompareItemScore1" inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="MIDDLE" outline="THICK">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="-353" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="60" y="37" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUICompareItemScore2" inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="MIDDLE" outline="THICK">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="390" y="-353" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="60" y="37" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUICompareItemScoreDifference2" inherits="GameFontGreen" justifyH="CENTER" justifyV="MIDDLE">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="470" y="-353" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="60" y="37" /></Size>
+						</FontString>
+						
+						<Texture name="BronzePawnUICompareItemScoreArrow1" file="Interface\AddOns\BronzePawn\Textures\UpgradeArrowBig">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="205" y="-360" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="40" y="40" /></Size>
+							<TexCoords left=".5" top="0" right="1" bottom="1" />
+						</Texture>
+						<Texture name="BronzePawnUICompareItemScoreArrow2" file="Interface\AddOns\BronzePawn\Textures\UpgradeArrowBig">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="355" y="-360" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="40" y="40" /></Size>
+							<TexCoords left="0" top="0" right=".5" bottom="1" />
+						</Texture>
+						
+					</Layer>
+					
+					<!-- Compare tab: art layer -->
+					<Layer level="ARTWORK">
+
+						<!-- The item header area -->
+						
+						<FontString name="BronzePawnUICompareItemName1" inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="MIDDLE">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="65" y="-23" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="170" y="37" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUICompareItemName2" inherits="GameFontNormalLarge" justifyH="RIGHT" justifyV="MIDDLE">
+							<Anchors><Anchor point="TOPRIGHT"><Offset><AbsDimension x="-65" y="-23" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="170" y="37" /></Size>
+						</FontString>
+						<FontString inherits="BronzePawnFontSilverLarge" justifyH="CENTER" justifyV="MIDDLE" text="BronzePawnUIFrame_VersusHeader_Text"><!-- —vs.— -->
+							<Anchors><Anchor point="TOPRIGHT"><Offset><AbsDimension x="-225" y="-33" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="150" y="20" /></Size>
+						</FontString>
+						
+						<!-- The total score row -->
+
+						<Texture name="BronzePawnUICompareItemScoreHighlight1" file="Interface\AddOns\BronzePawn\Textures\CompareBarLeft">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-351" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="290" y="40" /></Size>
+							<TexCoords left="0" top="0" right="1" bottom="0.5625" />
+						</Texture>
+						<Texture name="BronzePawnUICompareItemScoreHighlight2" file="Interface\AddOns\BronzePawn\Textures\CompareBarRight">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-351" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="290" y="40" /></Size>
+							<TexCoords left="0" top="0" right="1" bottom="0.5625" />
+						</Texture>
+						
+					</Layer>
+
+					<Layer level="BORDER">
+						
+						<Texture file="Interface\AddOns\BronzePawn\Textures\CompareBar">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-351" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="580" y="40" /></Size>
+							<TexCoords left="0" top="0" right="1" bottom="0.5625" />
+						</Texture>
+						
+					</Layer>
+
+					<Layer level="BACKGROUND">
+						
+						<Texture file="Interface\AddOns\BronzePawn\Textures\CompareBanner">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="210" y="-69" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="180" y="360" /></Size>
+						</Texture>
+						
+					</Layer>
+
+				</Layers>
+				
+				<!-- Compare tab: frames -->
+				
+				<Frames>
+				
+					<!-- The item header area -->
+					
+					<Button name="BronzePawnUICompareItemIcon1" inherits="ItemButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="-23" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="37" y="37" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="BronzePawnUICompareItemIconTexture1" setAllPoints="true" />
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>BronzePawnUICompareItemIcon_OnClick(1)</OnClick>
+							<OnReceiveDrag>BronzePawnUICompareItemIcon_OnClick(1)</OnReceiveDrag>
+							<OnEnter>BronzePawnUICompareItemIcon_TooltipOn(1)</OnEnter>
+							<OnLeave>BronzePawnUICompareItemIcon_TooltipOff()</OnLeave>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUICompareItemIcon2" inherits="ItemButtonTemplate">
+						<Anchors><Anchor point="TOPRIGHT"><Offset><AbsDimension x="-20" y="-23" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="37" y="37" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="BronzePawnUICompareItemIconTexture2" setAllPoints="true" />
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>BronzePawnUICompareItemIcon_OnClick(2)</OnClick>
+							<OnReceiveDrag>BronzePawnUICompareItemIcon_OnClick(2)</OnReceiveDrag>
+							<OnEnter>BronzePawnUICompareItemIcon_TooltipOn(2)</OnEnter>
+							<OnLeave>BronzePawnUICompareItemIcon_TooltipOff()</OnLeave>
+						</Scripts>
+					</Button>
+					
+					<!-- The stat list area -->
+
+					<ScrollFrame name="BronzePawnUICompareScrollFrame" inherits="UIPanelScrollFrameTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="70" y="-72" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="485" y="278" /></Size>
+						<ScrollChild>
+							<Frame name="BronzePawnUICompareScrollContent">
+								<Anchors><Anchor point="TOPLEFT" /></Anchors>
+								<Size><AbsDimension x="465" y="100" /></Size>
+								<!-- Content is added dynamically, and size is updated dynamically as well. -->
+							</Frame>
+						</ScrollChild>
+					</ScrollFrame>
+
+					<Frame name="BronzePawnUICompareMissingItemInfoFrame" hidden="true">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="-72" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="560" y="278" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_CompareMissingItemInfo_TextLeft">
+									<Anchors><Anchor point="TOPLEFT" x="20" y="-10" /></Anchors>
+									<Size><AbsDimension x="240" y="120" /></Size>
+								</FontString>
+								<FontString inherits="GameFontNormal" justifyH="RIGHT" justifyV="TOP" text="BronzePawnUIFrame_CompareMissingItemInfo_TextRight">
+									<Anchors><Anchor point="TOPRIGHT" x="-20" y="-10" /></Anchors>
+									<Size><AbsDimension x="240" y="120" /></Size>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+					
+					<!-- The item shortcuts row -->
+
+					<Button name="BronzePawnUIFrame_CompareSwapButton" inherits="BronzePawnUIButtonTemplate" text="BronzePawnUIFrame_CompareSwapButton_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="250" y="-405" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="100" y="25" /></Size>
+						<Scripts>
+							<OnClick>
+								BronzePawnUI_SwapCompareItems()
+							</OnClick>
+						</Scripts>
+					</Button>
+
+					<Button name="BronzePawnUIFrame_ClearItemsButton" inherits="ItemButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="-397" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="37" y="37" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\Paperdoll\UI-PaperDoll-Slot-Relic" setAllPoints="true" />
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								PlaySound("igMainMenuOptionCheckBoxOn")
+								BronzePawnUI_ClearCompareItems()
+							</OnClick>
+							<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+							<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+						</Scripts>
+					</Button>
+				
+					<Button name="BronzePawnUICompareItemShortcut1" hidden="true" inherits="ItemButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="-397" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="37" y="37" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="BronzePawnUICompareItemShortcut1Texture" setAllPoints="true" />
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>BronzePawnUICompareItemShortcut_OnClick(1)</OnClick>
+							<OnMouseUp>if button == "RightButton" then BronzePawnUICompareItemShortcut_OnClick(1, button) end</OnMouseUp>
+							<OnEnter>BronzePawnUICompareItemShortcut_TooltipOn(1)</OnEnter>
+							<OnLeave>BronzePawnUICompareItemShortcut_TooltipOff()</OnLeave>
+						</Scripts>
+					</Button>
+				
+					<Button name="BronzePawnUICompareItemShortcut2" hidden="true" inherits="ItemButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="100" y="-397" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="37" y="37" /></Size>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="BronzePawnUICompareItemShortcut2Texture" setAllPoints="true" />
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>BronzePawnUICompareItemShortcut_OnClick(2)</OnClick>
+							<OnMouseUp>if button == "RightButton" then BronzePawnUICompareItemShortcut_OnClick(2, button) end</OnMouseUp>
+							<OnEnter>BronzePawnUICompareItemShortcut_TooltipOn(2)</OnEnter>
+							<OnLeave>BronzePawnUICompareItemShortcut_TooltipOff()</OnLeave>
+						</Scripts>
+					</Button>
+				
+				</Frames>
+				
+				<Scripts>
+					<OnShow>BronzePawnUI_InitCompareTab()</OnShow>
+				</Scripts>
+					
+			</Frame>
+			
+			<!-- The Gems tab -->
+			<Frame name="BronzePawnUIGemsTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				<Layers>
+
+					<!-- Gems tab: art layer -->
+					<Layer level="ARTWORK">
+						
+						<!-- The header area -->
+						<FontString name="BronzePawnUIFrame_GemsHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_GemsHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="30" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_GemQualityDropDown_Label" inherits="GameFontNormal" justifyH="RIGHT" justifyV="MIDDLE" text="BronzePawnUIFrame_GemQualityDropDown_Label_Text"><!-- Quality: -->
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="345" y="-70"/></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="70" y="25" /></Size>
+						</FontString>
+
+						<Texture file="Interface\AddOns\BronzePawn\Textures\HorizontalBar">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-104" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="580" y="1" /></Size>
+						</Texture>
+						<Texture file="Interface\AddOns\BronzePawn\Textures\HorizontalBar">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-399" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="580" y="1" /></Size>
+						</Texture>
+
+					</Layer>
+
+				</Layers>
+				
+				<!-- Gems tab: UI elements -->
+				<Frames>
+					
+					<!-- The header area -->
+					
+					<Button name="BronzePawnUIFrame_GemQualityDropDown" hidden="false" inherits="UIDropDownMenuTemplate" text="BronzePawnUIFrame_GemQualityDropDown_Text">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="405" y="-70"/></Offset></Anchor></Anchors>
+						<Scripts>
+							<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+							<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+							<OnShow>BronzePawnUIFrame_GemQualityDropDown_OnShow()</OnShow>
+						</Scripts>
+					</Button>
+					
+					<!-- The scrolling gem list -->
+
+					<ScrollFrame name="BronzePawnUIGemScrollFrame" inherits="UIPanelScrollFrameTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-107" /></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="535" y="289" /></Size>
+						<ScrollChild>
+							<Frame name="BronzePawnUIGemScrollContent">
+								<Anchors><Anchor point="TOPLEFT" /></Anchors>
+								<Size><AbsDimension x="465" y="100" /></Size>
+								<!-- Content is added dynamically, and size is updated dynamically as well. -->
+							</Frame>
+						</ScrollChild>
+					</ScrollFrame>
+
+				</Frames>
+
+				<Scripts>
+					<OnShow>BronzePawnUI_InitGemsTab()</OnShow>
+				</Scripts>
+					
+			</Frame>
+
+			<!-- The Options tab -->
+			<Frame name="BronzePawnUIOptionsTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				<Layers>
+
+					<!-- Options tab: art layer -->
+					<Layer level="ARTWORK">
+
+						<FontString name="BronzePawnUIFrame_OptionsHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_OptionsHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="55" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_TooltipOptionsHeaderLabel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_TooltipOptionsHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-95" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="250" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_AsterisksHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_AsterisksHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="-235" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="225" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_CalculationOptionsHeaderLabel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_CalculationOptionsHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-95" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="250" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_DigitsBox_Label" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_DigitsBox_Label_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="325" y="-120" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="125" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_OtherOptionsHeaderLabel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_OtherOptionsHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-245" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="250" y="25" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_ButtonPositionHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="BronzePawnUIFrame_ButtonPositionHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="325" y="-270" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="225" y="25" /></Size>
+						</FontString>
+
+					</Layer>
+				</Layers>
+
+				<!-- Options tab: UI elements -->
+				<Frames>
+
+					<!-- Tooltip options -->
+					<CheckButton name="BronzePawnUIFrame_ShowItemIDsCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-120" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_ShowItemIDsCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ShowItemIDsCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_ShowIconsCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-145" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_ShowIconsCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ShowIconsCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_ShowExtraSpaceCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-170" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_ShowExtraSpaceCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ShowExtraSpaceCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_AlignRightCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-195" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_AlignRightCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_AlignRightCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_AsterisksAutoRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="-260" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_AsterisksAutoRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_AsterisksList_SetSelection(BronzePawnShowAsterisksNonzero)</OnClick></Scripts>
+					</CheckButton>
+					<CheckButton name="BronzePawnUIFrame_AsterisksAutoNoTextRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="-280" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_AsterisksAutoNoTextRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_AsterisksList_SetSelection(BronzePawnShowAsterisksNonzeroNoText)</OnClick></Scripts>
+					</CheckButton>
+					<CheckButton name="BronzePawnUIFrame_AsterisksOffRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="-300" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_AsterisksOffRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_AsterisksList_SetSelection(BronzePawnShowAsterisksNever)</OnClick></Scripts>
+					</CheckButton>
+					
+					<!-- Calculation options -->
+					<EditBox name="BronzePawnUIFrame_DigitsBox" inherits="InputBoxTemplate" numeric="true" letters="1" autoFocus="false">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="465" y="-120"/></Offset></Anchor></Anchors>
+						<Size><AbsDimension x="40" y="25" /></Size>
+						<Scripts>
+							<OnEnter>BronzePawnUIFrame_TooltipOn(this)</OnEnter>
+							<OnLeave>BronzePawnUIFrame_TooltipOff()</OnLeave>
+							<OnTextChanged>BronzePawnUIFrame_DigitsBox_OnTextChanged()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+	
+					<CheckButton name="BronzePawnUIFrame_UnenchantedValuesCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-145" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_UnenchantedValuesCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_UnenchantedValuesCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_EnchantedValuesCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-170" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_EnchantedValuesCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_EnchantedValuesCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+
+					<CheckButton name="BronzePawnUIFrame_DebugCheck" inherits="BronzePawnUICheckboxTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="300" y="-195" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUICheckboxLabelTemplate" text="BronzePawnUIFrame_DebugCheck_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_DebugCheck_OnClick()</OnClick></Scripts>
+					</CheckButton>
+					
+					<!-- Other options -->
+					
+					<CheckButton name="BronzePawnUIFrame_ButtonRightRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="325" y="-295" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_ButtonRightRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ButtonPositionList_SetSelection(BronzePawnButtonPositionRight)</OnClick></Scripts>
+					</CheckButton>
+					<CheckButton name="BronzePawnUIFrame_ButtonLeftRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="325" y="-315" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_ButtonLeftRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ButtonPositionList_SetSelection(BronzePawnButtonPositionLeft)</OnClick></Scripts>
+					</CheckButton>
+					<CheckButton name="BronzePawnUIFrame_ButtonOffRadio" inherits="BronzePawnUIRadioButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="325" y="-335" /></Offset></Anchor></Anchors>
+						<Layers><Layer level="ARTWORK">
+							<FontString name="$parent_Label" inherits="BronzePawnUIRadioButtonLabelTemplate" text="BronzePawnUIFrame_ButtonOffRadio_Text" />
+						</Layer></Layers>
+						<Scripts><OnClick>BronzePawnUIFrame_ButtonPositionList_SetSelection(BronzePawnButtonPositionHidden)</OnClick></Scripts>
+					</CheckButton>
+
+				</Frames>
+
+				<Scripts>
+					<OnShow>
+						BronzePawnUIOptionsTabPage_OnShow()
+					</OnShow>
+				</Scripts>
+
+			</Frame>
+			
+			<!-- The About tab -->
+			<Frame name="BronzePawnUIAboutTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				<Layers>
+
+					<!-- About tab: art layer -->
+					<Layer level="ARTWORK">
+
+						<Texture file="Interface\AddOns\BronzePawn\Textures\BronzePawnLogo">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="128" y="64" /></Size>
+						</Texture>
+						
+						<FontString name="BronzePawnUIFrame_AboutHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" text="BronzePawnUIFrame_AboutHeaderLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="175" y="-35" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="300" y="20" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUIFrame_AboutVersionLabel" inherits="BronzePawnFontSilver" justifyH="LEFT">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="175" y="-55" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="300" y="20" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUIFrame_AboutTranslationLabel" inherits="BronzePawnFontSilver" justifyH="LEFT" text="BronzePawnUIFrame_AboutTranslationLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="175" y="-75" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="300" y="20" /></Size>
+						</FontString>
+
+						<FontString name="BronzePawnUIFrame_ReadmeLabel" inherits="GameFontHighlight" justifyH="LEFT" text="BronzePawnUIFrame_ReadmeLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-100" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="70" /></Size>
+						</FontString>
+						<FontString name="BronzePawnUIFrame_WebsiteLabel" inherits="GameFontNormal" justifyH="LEFT" text="BronzePawnUIFrame_WebsiteLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-180" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="70" /></Size>
+						</FontString>
+
+					</Layer>
+					
+				</Layers>
+				
+				<Scripts>
+					<OnShow>BronzePawnUIAboutTabPage_OnShow()</OnShow>
+				</Scripts>
+			</Frame>
+			
+			<!-- The Help tab -->
+			<Frame name="BronzePawnUIHelpTabPage" hidden="true" inherits="BronzePawnUITabPageTemplate">
+				<Layers>
+
+					<!-- Help tab: art layer -->
+					<Layer level="ARTWORK">
+
+						<FontString name="BronzePawnUIFrame_GettingStartedLabel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" text="BronzePawnUIFrame_GettingStartedLabel_Text">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-30" /></Offset></Anchor></Anchors>
+							<Size><AbsDimension x="550" y="400" /></Size>
+						</FontString>
+
+					</Layer>
+					
+				</Layers>
+			</Frame>
+			
+			<!-- The tab buttons -->
+			<Button name="$parentTab1" inherits="CharacterFrameTabButtonTemplate" id="1" text="BronzePawnUIFrame_ScalesTab_Text">
+				<Anchors><Anchor point="LEFT" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="6" y="-10" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIScalesTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab2" inherits="CharacterFrameTabButtonTemplate" id="2" text="BronzePawnUIFrame_ValuesTab_Text">
+				<Anchors><Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT"><Offset><AbsDimension x="-16" y="0" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIValuesTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab3" inherits="CharacterFrameTabButtonTemplate" id="3" text="BronzePawnUIFrame_CompareTab_Text">
+				<Anchors><Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT"><Offset><AbsDimension x="-16" y="0" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUICompareTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab4" inherits="CharacterFrameTabButtonTemplate" id="4" text="BronzePawnUIFrame_GemsTab_Text">
+				<Anchors><Anchor point="LEFT" relativeTo="$parentTab3" relativePoint="RIGHT"><Offset><AbsDimension x="-16" y="0" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIGemsTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab5" inherits="CharacterFrameTabButtonTemplate" id="5" text="BronzePawnUIFrame_OptionsTab_Text">
+				<Anchors><Anchor point="LEFT" relativeTo="$parentTab4" relativePoint="RIGHT"><Offset><AbsDimension x="-16" y="0" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIOptionsTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab6" inherits="CharacterFrameTabButtonTemplate" id="6" text="BronzePawnUIFrame_AboutTab_Text">
+				<Anchors><Anchor point="RIGHT" relativePoint="BOTTOMRIGHT"><Offset><AbsDimension x="-6" y="-10" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIAboutTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab7" inherits="CharacterFrameTabButtonTemplate" id="7" text="BronzePawnUIFrame_HelpTab_Text">
+				<Anchors><Anchor point="RIGHT" relativeTo="$parentTab6" relativePoint="LEFT"><Offset><AbsDimension x="16" y="0" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igCharacterInfoTab")
+						BronzePawnUISwitchToTab(BronzePawnUIHelpTabPage)
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED")
+				this:RegisterEvent("ADDON_LOADED")
+				this:RegisterEvent("PLAYER_ENTERING_WORLD")
+				this:RegisterEvent("PLAYER_LOGOUT")
+				BronzePawnUITabList = { BronzePawnUIScalesTabPage, BronzePawnUIValuesTabPage, BronzePawnUICompareTabPage, BronzePawnUIGemsTabPage, BronzePawnUIOptionsTabPage, BronzePawnUIAboutTabPage, BronzePawnUIHelpTabPage }
+				PanelTemplates_SetNumTabs(BronzePawnUIFrame, #BronzePawnUITabList)
+			</OnLoad>
+			<OnEvent>
+				BronzePawnOnEvent(event, ...)
+			</OnEvent>
+			<OnShow>
+				PlaySound("igCharacterInfoOpen")
+				BronzePawnUI_EnsureLoaded()
+			</OnShow>
+			<OnHide>
+				PlaySound("igCharacterInfoClose")
+			</OnHide>
+			<OnMouseDown>this:StartMoving()</OnMouseDown>
+			<OnMouseUp>this:StopMovingOrSizing()</OnMouseUp>
+			<OnDragStop>this:StopMovingOrSizing()</OnDragStop>
+		</Scripts>
+		
+	</Frame>
+	
+	<!-- BronzePawn's options page in Interface Options -->
+	<Frame name="BronzePawnInterfaceOptionsFrame" inherits="BronzePawnUITabPageTemplate">
+		<Size><AbsDimension x="385" y="409" /></Size>
+
+		<!-- Art layer -->
+		<Layers>
+			<Layer level="ARTWORK">
+
+				<Texture file="Interface\AddOns\BronzePawn\Textures\BronzePawnLogo">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-10" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="128" y="64" /></Size>
+				</Texture>
+				
+				<FontString name="BronzePawnInterfaceOptionsFrame_AboutHeaderLabel" inherits="GameFontNormal" justifyH="LEFT" text="BronzePawnUIFrame_AboutHeaderLabel_Text">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="-10" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="225" y="20" /></Size>
+				</FontString>
+				<FontString name="BronzePawnInterfaceOptionsFrame_AboutVersionLabel" inherits="BronzePawnFontSilver" justifyH="LEFT">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="-30" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="225" y="20" /></Size>
+				</FontString>
+				<FontString name="BronzePawnInterfaceOptionsFrame_AboutTranslationLabel" inherits="BronzePawnFontSilver" justifyH="LEFT" text="BronzePawnUIFrame_AboutTranslationLabel_Text">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="-50" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="225" y="20" /></Size>
+				</FontString>
+
+				<FontString name="BronzePawnInterfaceOptionsFrame_OptionsHeaderLabel" inherits="GameFontNormalLarge" justifyH="LEFT" text="BronzePawnInterfaceOptionsFrame_OptionsHeaderLabel_Text">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="-85" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="355" y="20" /></Size>
+				</FontString>
+				<FontString name="BronzePawnInterfaceOptionsFrame_OptionsSubHeaderLabel" inherits="GameFontHighlightSmall" justifyH="LEFT" text="BronzePawnInterfaceOptionsFrame_OptionsSubHeaderLabel_Text">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="-105" /></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="355" y="40" /></Size>
+				</FontString>
+
+			</Layer>
+		</Layers>
+
+		<!-- Controls -->
+		<Frames>
+			
+			<Button name="BronzePawnInterfaceOptionsFrame_BronzePawnButton" inherits="BronzePawnUI_InventoryButtonTemplate">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="-155" /></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						InterfaceOptionsFrameOkay_OnClick()
+						HideUIPanel(GameMenuFrame)
+						BronzePawnUIShow()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				BronzePawnInterfaceOptionsFrame_OnLoad()
+			</OnLoad>
+		</Scripts>
+	
+	</Frame>
+	
+	<!-- A generic dialog for asking for a string -->
+	<Frame name="BronzePawnUIStringDialog" inherits="BronzePawnUIDialogTemplate">
+	 	<Size><AbsDimension x="350" y="155" /></Size>
+
+		<!-- The art layer -->
+		<Layers>
+			<Layer level="ARTWORK">
+
+				<FontString name="$parent_PromptText" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="25" y="-25"/></Offset></Anchor></Anchors>
+					<Size><AbsDimension x="300" y="40" /></Size>
+				</FontString>
+
+			</Layer>
+		</Layers>
+
+		<!-- The UI elements -->
+		<Frames>
+
+			<!-- Main frame buttons and such -->
+			<EditBox name="$parent_TextBox" inherits="InputBoxTemplate" hidden="false">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="-75" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="250" y="25" /></Size>
+				<Scripts>
+					<OnTextChanged>BronzePawnUIStringDialog_TextBox_OnTextChanged()</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			
+			<Button name="$parent_OKButton" hidden="false" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-125" y="20" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="95" y="25" /></Size>
+				<Scripts>
+					<OnClick>BronzePawnUIStringDialog_OKButton_OnClick()</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Button name="$parent_CancelButton" hidden="false" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-20" y="20" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="95" y="25" /></Size>
+				<Scripts>
+					<OnClick>BronzePawnUIStringDialog_CancelButton_OnClick()</OnClick>
+				</Scripts>
+			</Button>
+			
+		</Frames>
+		
+	</Frame>
+	
+</Ui>
