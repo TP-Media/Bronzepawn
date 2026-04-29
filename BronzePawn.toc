@@ -6,6 +6,7 @@
 ## OptionalDependencies: AtlasLoot, EQCompare, EquipCompare, MultiTips, Outfitter
 ## SavedVariables: BronzePawnCommon, PawnCommon
 ## SavedVariablesPerCharacter: BronzePawnOptions, BronzePawnWowheadScaleProviderOptions, PawnOptions, PawnWowheadScaleProviderOptions
+## X-GitHub: TP-Media/Bronzepawn
 
 VgerCore\VgerCore.lua
 
